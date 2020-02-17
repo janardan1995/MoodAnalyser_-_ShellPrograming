@@ -1,7 +1,7 @@
-#!/bin/bash/ -x
+#!/bin/bash/ 
 echo "welcome to address registration"
 echo "adding name to the registration book" >> test1.txt
-echo ..................................... >> test1.txt
+echo ................................ >> test1.txt
 echo
 
 #first name and lastname method

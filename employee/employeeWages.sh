@@ -1,5 +1,4 @@
-#!/bin/bash/ -x
-
+#!/bin/bash/ 
 #by using this function we can we can know the total hour
 totalworkHour()
 {
@@ -11,7 +10,6 @@ else
 echo "total hours employee work in that month: $hour"
 fi
 }
-
 
 echo "Welcome to Employee Wage Computation Program"
 count=0
