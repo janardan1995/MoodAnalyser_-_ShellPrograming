@@ -10,13 +10,30 @@ namespace Class1
     using System;
     public class MoodAnalyser
     {
-        public static string AnalysisMoodFunction(string str)
-        {                      
-            if (str.ToLower().Contains("sad"))
+        public string str;
+       
+        public MoodAnalyser(string message)
+        {
+            this.str = message;
+        }
+        public static string AnalysisMoodFunction(string strr)
+        {
+            if (strr.ToLower().Contains("sad"))
             {
                 return "Sad mood";
             }
             return "Happy";
+            //return "sad";
+        }      
+        public string AnalysisMoodFunctionWithConstructor()
+        {
+           
+            if (str.ToLower().Contains("sad"))
+            {
+                return "sad";
+            }
+            return "Happy";
+            
         }
     }
 }
