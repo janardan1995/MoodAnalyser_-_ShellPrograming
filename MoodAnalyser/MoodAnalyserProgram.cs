@@ -12,7 +12,7 @@ namespace Class1
     {
         public static string AnalysisMoodFunction(string str)
         {                      
-            if (str.Contains("sad"))
+            if (str.ToLower().Contains("sad"))
             {
                 return "Sad mood";
             }

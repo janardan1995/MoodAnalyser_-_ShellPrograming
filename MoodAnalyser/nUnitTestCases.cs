@@ -3,9 +3,9 @@ using Class1;
 namespace NUnitTestMoodAnalyser
 {
     public class Tests
-    {       
+    {
         [Test]
-        public static void Giving_IaminSadMood_whenAnalysis_should_return_sad()
+        public static void GivenSadMessage_WhenAnalyse_ShouldReturnSad()
         {
             //arrange
             string str = "I am in sad mood";
@@ -16,17 +16,16 @@ namespace NUnitTestMoodAnalyser
 
             //Assert
             Assert.AreEqual(excepted, match1);
-        } 
+        }
+         
         [Test]
-        public static void Giving_Iaminanymood_whenAnalysis_should_return_sad()
+        public static void GivienAnyMesageExceptSad_WhenAnalyse_ShouldReturnHappy()
         {
-            //arrange
+            ////arrange
             string str = "I am in any mood";
             string excepted = "Happy";
-
             //act
             string match2 = MoodAnalyser.AnalysisMoodFunction(str);
-
             //Assert
             Assert.AreEqual(excepted, match2);
         }
