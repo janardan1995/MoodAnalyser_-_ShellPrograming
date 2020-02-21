@@ -1,9 +1,26 @@
-using NUnit.Framework;
-using Class1;
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="nUnitTestCase.cs" company="Bridgelabz">
+//   Copyright © 2020 Company="BridgeLabz"
+// </copyright>
+// <creator name="Janardan Das"/>
+// --------------------------------------------------------------------------------------------------------------------
+
+/// <summary>
+/// this is the the nunit testing 
+/// </summary>
 namespace NUnitTestMoodAnalyser
 {
+    using NUnit.Framework;
+    using Class1;
+
+    /// <summary>
+    /// a Tests class is created
+    /// </summary>
     public class Tests
     {
+        /// <summary>
+        /// this is the first method to test for analysis mood should return sad
+        /// </summary>
         [Test]
         public void GivenSadMessage_WhenAnalyse_ShouldReturnSad()
         {
@@ -18,6 +35,9 @@ namespace NUnitTestMoodAnalyser
             Assert.AreEqual(excepted, match1);
         }
          
+        /// <summary>
+        /// this method should return happy if the string message has no sad word
+        /// </summary>
         [Test]
         public void GivenAnyMesageExceptSad_WhenAnalyse_ShouldReturnHappy()
         {
@@ -30,15 +50,32 @@ namespace NUnitTestMoodAnalyser
             Assert.AreEqual(excepted, match2);
         }
 
+        /// <summary>
+        /// created a constructor in origin program 
+        /// here we have testing for sad 
+        /// </summary>
         [Test]
-        public void GivenAnyMessaageInConstructor_WhenAnalysis_ShouldReturnSad()
+        public void GivenSadMessaageInConstructor_WhenAnalysis_ShouldReturnSad()
         {
-           // string str = "any sad meaasage";
             string expected = "sad";
-
             MoodAnalyser ma =new MoodAnalyser("I am in sad Mood");
-            string x = ma.AnalysisMoodFunctionWithConstructor();
-            Assert.AreEqual(expected, x);
+
+            string x1 = ma.AnalysisMoodFunctionWithConstructor();
+            Assert.AreEqual(expected, x1);
+
+        }
+        
+        /// <summary>
+        /// created a constructor and should pass happy
+        /// </summary>
+        [Test]
+        public void GivenExceptSadMessaageInConstructor_WhenAnalysis_ShouldReturnHappy()
+        {
+            string expected = "Happy";
+
+            MoodAnalyser ma =new MoodAnalyser("I am in Happy Mood");
+            string x2 = ma.AnalysisMoodFunctionWithConstructor();
+            Assert.AreEqual(expected, x2);
 
         }
     }
