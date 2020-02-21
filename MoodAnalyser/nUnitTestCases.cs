@@ -16,6 +16,19 @@ namespace NUnitTestMoodAnalyser
 
             //Assert
             Assert.AreEqual(excepted, match1);
+        } 
+        [Test]
+        public static void Giving_Iaminanymood_whenAnalysis_should_return_sad()
+        {
+            //arrange
+            string str = "I am in any mood";
+            string excepted = "Happy";
+
+            //act
+            string match2 = MoodAnalyser.AnalysisMoodFunction(str);
+
+            //Assert
+            Assert.AreEqual(excepted, match2);
         }
     }
 }
