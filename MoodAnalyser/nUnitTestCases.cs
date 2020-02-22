@@ -5,96 +5,39 @@
 // <creator name="Janardan Das"/>
 // --------------------------------------------------------------------------------------------------------------------
 
-/// <summary>
-/// this is the the nunit testing 
-/// </summary>
 namespace NUnitTestMoodAnalyser
 {
     using NUnit.Framework;
     using Class1;
-
-    /// <summary>
-    /// a Tests class is created
-    /// </summary>
+        
     public class Tests
-    {
-        /// <summary>
-        /// this is the first method to test for analysis mood should return sad
-        /// </summary>
+    {       
         [Test]
         public void GivenSadMessage_WhenAnalyse_ShouldReturnSad()
         {
-            try
-            {
-                ////arrange
-                string str = "I am in sad mood";
-                string excepted = "Sad mood";
-
-                ////act
-                string match1 = MoodAnalyser.AnalysisMoodFunction(str);
-
-                ////Assert
-                Assert.AreEqual(excepted, match1);
-            }
-            catch (AssertionException e)
-            {
-                throw e;
-            }
-        }
-         
-        /// <summary>
-        /// this method should return happy if the string message has no sad word
-        /// </summary>
+            string excepted = "SAD";
+            MoodAnalyser MA = new MoodAnalyser("I am in sad mood");
+            string match1 = MA.AnalyseMood();              
+            Assert.AreEqual(excepted, match1);           
+        }         
+     
         [Test]
         public void GivenAnyMesageExceptSad_WhenAnalyse_ShouldReturnHappy()
         {
-            ////arrange
-            string str = "I am in any mood";
-            string excepted = "Happy";
-
-            ////act
-            string match2 = MoodAnalyser.AnalysisMoodFunction(str);
-
-            ////Assert
+           
+            string excepted = "HAPPY";
+            MoodAnalyser MA = new MoodAnalyser("I am in any mood");
+            string match2 = MA.AnalyseMood();
             Assert.AreEqual(excepted, match2);
-        }
-
-        /// <summary>
-        /// created a constructor in origin program 
-        /// here we have testing for sad 
-        /// </summary>
-        [Test]
-        public void GivenSadMessaageInConstructor_WhenAnalysis_ShouldReturnSad()
-        {
-            string expected = "sad";
-            MoodAnalyser ma =new MoodAnalyser("I am in sad Mood");
-            string x1 = ma.AnalysisMoodFunctionWithConstructor();
-            Assert.AreEqual(expected, x1);
-
-        }
+        } 
         
-        /// <summary>
-        /// created a constructor and should pass happy
-        /// </summary>
         [Test]
-        public void GivenExceptSadMessaageInConstructor_WhenAnalysis_ShouldReturnHappy()
+        public void GivennullMesage_WhenAnalyse_ShouldReturnHappy()
         {
-            string expected = "Happy";
-            MoodAnalyser ma =new MoodAnalyser("I am in Happy Mood");
-            string x2 = ma.AnalysisMoodFunctionWithConstructor();
-            Assert.AreEqual(expected, x2);
-
-        }
-
-        /// <summary>
-        /// A method is created for exception and here tested
-        /// </summary>
-        [Test]
-        public void GivenNullMessage_whenAnalysis_ShouldReturnHappy()
-        {
-            string expected = "Happy";
-            var result = MoodAnalyser.AnalysisMoodFunctionWithExceptionHandeling(null);
-            Assert.AreEqual(expected,result);
+            string expected = "HAPPY";
+            MoodAnalyser MA = new MoodAnalyser();
+            string match3 = MA.AnalyseMood();
+            Assert.AreEqual(expected, match3);
         }
     }
 }

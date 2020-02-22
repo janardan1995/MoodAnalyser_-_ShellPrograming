@@ -10,49 +10,32 @@ namespace Class1
     using System;
     public class MoodAnalyser
     {
-      
         public string str;
-       
+
+        public MoodAnalyser()
+        {
+           
+        }
+
         public MoodAnalyser(string message)
         {
-            this.str = message;
+           this.str = message;
         }
 
-        
-        public static string AnalysisMoodFunction(string strr)
-        {
-            if (strr.ToLower().Contains("sad"))
-            {
-                return "Sad mood";
-            }
-            return "Happy";
-        }   
-      
-        public string AnalysisMoodFunctionWithConstructor()
-        {           
-            if (str.ToLower().Contains("sad"))
-            {
-                return "sad";
-            }
-            return "Happy";
-            
-        }
-
-        public static string AnalysisMoodFunctionWithExceptionHandeling(string message)
+        public string AnalyseMood()
         {
             try
             {
-                if (message.ToLower().Contains("sad"))
+                if (str.ToLower().Contains("sad"))
                 {
-                    return "sad";
+                    return "SAD";
                 }
+                return "HAPPY";
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine(e);
-               // return "Happy";
+                return "HAPPY";
             }
-            return "Happy";
         }
-    }
+    }            
 }
