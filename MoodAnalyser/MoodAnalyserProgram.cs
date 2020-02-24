@@ -8,13 +8,12 @@
 namespace Class1
 {
     using System;
+    
     public class MoodAnalyser
     {
         public string str;
-
         public MoodAnalyser()
-        {
-           
+        {           
         }
 
         public MoodAnalyser(string message)
@@ -26,15 +25,26 @@ namespace Class1
         {
             try
             {
+                if (str.Length == 0)
+                {
+                    throw new MoodAnalysisException("Empty message");
+                }
+
                 if (str.ToLower().Contains("sad"))
                 {
                     return "SAD";
                 }
-                return "HAPPY";
+               
+                    return "HAPPY";             
+             }
+            catch (NullReferenceException)
+            {
+                //return "HAPPY";
+                throw new MoodAnalysisException("null message");
             }
             catch (Exception)
             {
-                return "HAPPY";
+                throw new MoodAnalysisException("empty message");
             }
         }
     }            
