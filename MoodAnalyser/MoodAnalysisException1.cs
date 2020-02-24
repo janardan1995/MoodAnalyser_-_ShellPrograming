@@ -9,36 +9,17 @@ using System;
 using System.Runtime.Serialization;
 
 namespace Class1
-{
-    
+{    
     public class MoodAnalysisException : Exception
     {       
         public MoodAnalysisException(string message) : base(message)
         {
 
         }
-
-        public MoodAnalysisException(string message, Exception h) : base(message, h)
-        {
-
-        }
         public enum state
         {
             EMPTY, NULL, OTHER
-        }
-
-        //public string variable;
-        //public MoodAnalysisException(string message)
-        //{
-        //    this.variable = message;
-        //}
-        //public override string Message
-        //{
-        //    get
-        //    {
-        //        return variable;
-        //    }
-        //}
+        }      
 
     }
 }

@@ -45,7 +45,7 @@ namespace Class1
             catch (NullReferenceException)
             {
                 //return "HAPPY";
-                 Console.WriteLine("exception is {0}", MoodAnalysisException.state.EMPTY);
+                 Console.WriteLine("exception is {0}", MoodAnalysisException.state.NULL);
                 throw new MoodAnalysisException("null message");
             }
 
@@ -54,7 +54,14 @@ namespace Class1
                 Console.WriteLine("exception is {0}", MoodAnalysisException.state.OTHER);
                 throw new MoodAnalysisException("other message");
             }
-
         }
+
+        public static Object ReflectionMethod()
+        {
+            Type type = Type.GetType("Class1.MoodAnalyser");
+            return type.FullName;
+        }
+
+
     }            
 }

@@ -60,5 +60,14 @@ namespace NUnitTestMoodAnalyser
 
         }
 
+        [Test]
+        public void ReflectionTest()
+        {
+           MoodAnalyser obj1 = MoodAnalyserFactory.CreateMoodAnalyser("MoodAnalyser");
+            object obj2 = MoodAnalyser.ReflectionMethod();
+            Assert.AreEqual(obj1.GetType().ToString(),obj2);
+        }
+
+
     }
 }
