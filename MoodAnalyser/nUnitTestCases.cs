@@ -43,7 +43,7 @@ namespace NUnitTestMoodAnalyser
         [Test]
         public void GivenNullMessage_WhenAnalysis_ShouldThrowMoodAnalysisException()
         {
-            MoodAnalyser MA = new MoodAnalyser();
+            MoodAnalyser MA = new MoodAnalyser(null);
             var ex = Assert.Throws<MoodAnalysisException>(() => MA.AnalyseMood());
             Assert.That(ex.Message, Is.EqualTo("null message"));
             //Assert.AreEqual("null message", ex.Message);         

@@ -17,7 +17,15 @@ namespace Class1
         {
 
         }
-       
+
+        public MoodAnalysisException(string message, Exception h) : base(message, h)
+        {
+
+        }
+        public enum state
+        {
+            EMPTY, NULL, OTHER
+        }
 
         //public string variable;
         //public MoodAnalysisException(string message)

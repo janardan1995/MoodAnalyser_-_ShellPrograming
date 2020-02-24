@@ -21,20 +21,16 @@ namespace Class1
            this.str = message;
         }
 
-        public enum state
-        {
-            EMPTY,NULL
-        }
-
+       
         public string AnalyseMood()
         {
             try
             {
-                if (str=="")
+                if (str == "")
                 {
-                    throw new MoodAnalysisException("empty message");
 
-                    
+                    Console.WriteLine("exception is {0}", MoodAnalysisException.state.EMPTY);
+                    throw new MoodAnalysisException("empty message");                    
                 }
                 else
                 {
@@ -49,12 +45,14 @@ namespace Class1
             catch (NullReferenceException)
             {
                 //return "HAPPY";
+                 Console.WriteLine("exception is {0}", MoodAnalysisException.state.EMPTY);
                 throw new MoodAnalysisException("null message");
             }
 
-            catch (Exception)
+            catch (ArgumentException)
             {
-                throw new MoodAnalysisException("empty message");
+                Console.WriteLine("exception is {0}", MoodAnalysisException.state.OTHER);
+                throw new MoodAnalysisException("other message");
             }
 
         }
