@@ -43,9 +43,19 @@ namespace NUnitTestMoodAnalyser
         [Test]
         public void GivenNullMessage_WhenAnalysis_ShouldThrowMoodAnalysisException()
         {
-            MoodAnalyser MA = new MoodAnalyser(null);
+            MoodAnalyser MA = new MoodAnalyser();
             var ex = Assert.Throws<MoodAnalysisException>(() => MA.AnalyseMood());
             Assert.That(ex.Message, Is.EqualTo("null message"));
+            //Assert.AreEqual("null message", ex.Message);         
+
+        }
+
+         [Test]
+        public void GivenEmptyMessage_WhenAnalysis_ShouldThrowMoodAnalysisException()
+        {
+            MoodAnalyser MA = new MoodAnalyser("");
+            var ex = Assert.Throws<MoodAnalysisException>(() => MA.AnalyseMood());
+            Assert.That(ex.Message, Is.EqualTo("empty message"));
             //Assert.AreEqual("null message", ex.Message);         
 
         }

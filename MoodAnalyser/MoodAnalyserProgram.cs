@@ -21,31 +21,42 @@ namespace Class1
            this.str = message;
         }
 
+        public enum state
+        {
+            EMPTY,NULL
+        }
+
         public string AnalyseMood()
         {
             try
             {
-                if (str.Length == 0)
+                if (str=="")
                 {
-                    throw new MoodAnalysisException("Empty message");
-                }
+                    throw new MoodAnalysisException("empty message");
 
-                if (str.ToLower().Contains("sad"))
-                {
-                    return "SAD";
+                    
                 }
-               
-                    return "HAPPY";             
-             }
+                else
+                {
+                    if (str.ToLower().Contains("sad"))
+                    {
+                        return "SAD";
+                    }
+
+                    return "HAPPY";
+                }             
+            }
             catch (NullReferenceException)
             {
                 //return "HAPPY";
                 throw new MoodAnalysisException("null message");
             }
+
             catch (Exception)
             {
                 throw new MoodAnalysisException("empty message");
             }
+
         }
     }            
 }
