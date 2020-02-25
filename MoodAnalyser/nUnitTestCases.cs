@@ -63,9 +63,18 @@ namespace NUnitTestMoodAnalyser
         [Test]
         public void ReflectionTest()
         {
-           MoodAnalyser obj1 = MoodAnalyserFactory.CreateMoodAnalyser("MoodAnalyser");
-            object obj2 = MoodAnalyser.ReflectionMethod();
+           var obj1 = MoodAnalyserFactory.CreateMoodAnalyser("MoodAnalyser");
+            var obj2 = MoodAnalyser.ReflectionMethod();
             Assert.AreEqual(obj1.GetType().ToString(),obj2);
+        }
+
+        [Test]
+        public void GivenClassNameWhenImproperShouldThrowMoodAnalyserException()
+        {
+          
+            var ex = Assert.Throws<MoodAnalysisException>(() => MoodAnalyserFactory.CreateMoodAnalyser(""));
+            Assert.AreEqual("NO SUCH CASE ERROR1", ex.Message);
+
         }
 
 

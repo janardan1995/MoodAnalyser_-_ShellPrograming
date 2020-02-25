@@ -6,16 +6,22 @@ using Class1;
 
 namespace Class1
 {
-   public class MoodAnalyserFactory
+    public class MoodAnalyserFactory
     {
         public static MoodAnalyser CreateMoodAnalyser(string type)
         {
-            if (type.Equals("MoodAnalyser"))
+            try
             {
+                if (type.Equals("MoodAnalyser"))
                 return new MoodAnalyser();
+                else
+                throw new MoodAnalysisException("NO SUCH CASE ERROR1");
             }
-            else
-                return null;
+            catch (NullReferenceException)
+            {
+                throw new MoodAnalysisException("NO SUCH CASE ERROR2");
+            }
+
         }
 
     }
