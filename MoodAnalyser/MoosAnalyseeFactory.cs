@@ -1,38 +1,60 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Reflection;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="MoodAnalyseeFactory.cs" company="Bridgelabz">
+//   Copyright © 2020 Company="BridgeLabz"
+// </copyright>
+// <creator name="Janardan Das"/>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace MoodAnalyserProject
 {
+    using System;
+    using System.Reflection;
+
+    /// <summary>
+    /// this my Factory class to create object by using reflection
+    /// </summary>
     public class CreateMoodFactory
     {
-        public static Type CreateMoodAnalyserReflection(string ClassName)
+        /// <summary>
+        /// CreatedMoodAnalyserReflection to create a reflection object
+        /// </summary>
+        /// <param name="ClassName">it will return object  </param>
+        /// <returns></returns>
+        public static object CreateMoodAnalyserReflection(string ClassName)
         {
+            Type type = Type.GetType("MoodAnalyserProject." + ClassName);          
+            
             try
             {
-                if (ClassName == null || ClassName!= "MoodAnalyserProject.MoodAnalyser" || ClassName=="")
+                if (type == null)
                 {
-                    throw new MoodAnalyserException("No Such Class Error");
+                    throw new MoodAnalyserException(MoodAnalyserProject.State.NO_SUCH_CLASS_ERROR+"");
                 }
                 else
                 {
-                    Type t = Type.GetType(ClassName);
-                    return t;
+                    ConstructorInfo constructorInfo = type.GetConstructor(Type.EmptyTypes);
+                    object classObject = constructorInfo.Invoke(new object[] { });
+                    return classObject;
+
                 }
 
             }
-            catch (Exception)
+            catch (MoodAnalyserException ex)
             {
-                throw new MoodAnalyserException("No Such Class Error");
+                
+                return ex.Message;
             }
         }
 
+        /// <summary>
+        /// just it create an object of MoodAnalysis class
+        /// </summary>
+        /// <returns>return an object</returns>
         public static MoodAnalyser CreateMoodAnalyserObject()
         {
             return new MoodAnalyser();
         }
-
     }
-   
 }
+
+
