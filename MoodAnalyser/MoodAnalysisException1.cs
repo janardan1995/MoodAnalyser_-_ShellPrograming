@@ -1,44 +1,41 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MoodAnalyser.cs" company="Bridgelabz">
+// <copyright file="MoodAnalyserException.cs" company="Bridgelabz">
 //   Copyright © 2020 Company="BridgeLabz"
 // </copyright>
 // <creator name="Janardan Das"/>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Runtime.Serialization;
+namespace MoodAnalyserProject
+{    
+    using System;
 
-namespace Class1
-{
-    
-    public class MoodAnalysisException : Exception
-    {       
-        public MoodAnalysisException(string message) : base(message)
-        {
-
-        }
-
-        public MoodAnalysisException(string message, Exception h) : base(message, h)
-        {
-
-        }
-        public enum state
-        {
-            EMPTY, NULL, OTHER
-        }
-
-        //public string variable;
-        //public MoodAnalysisException(string message)
-        //{
-        //    this.variable = message;
-        //}
-        //public override string Message
-        //{
-        //    get
-        //    {
-        //        return variable;
-        //    }
-        //}
-
+    /// <summary>
+    /// Enumerator are written here
+    /// </summary>   
+    public enum State
+    {
+        EMPTY,NULL,N0_SUCH_METHOD_ERROR, NO_SUCH_CLASS_ERROR,OTHER
     }
+
+    /// <summary>
+    ///this is my  Custom exception throws MoodAnalyserExceptiom 
+    /// </summary>
+    [Serializable]
+    public class MoodAnalyserException : Exception
+    {
+        /// <summary>
+        /// Default MoodAnalyserException without perimeters
+        /// </summary>
+        public MoodAnalyserException() : base()
+        {
+        }
+       
+        /// <summary>
+        /// this custom MoodAnalyserException taken a string typr perimeter
+        /// </summary>
+        /// <param name="message">single perimeter</param>
+        public MoodAnalyserException(string message): base(message)
+        {
+        }
+    }    
 }

@@ -5,56 +5,65 @@
 // <creator name="Janardan Das"/>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Class1
+namespace MoodAnalyserProject
 {
     using System;
-    
+
+    /// <summary>
+    /// MoodAnalyser class
+    /// </summary>
     public class MoodAnalyser
     {
-        public string str;
+        /// <summary>
+        /// static string variable
+        /// </summary>
+        public static string variable;
+
+        /// <summary>
+        /// default constructor
+        /// </summary>
         public MoodAnalyser()
-        {           
+        {
         }
 
+        /// <summary>
+        /// constructor with perimeter 
+        /// </summary>
+        /// <param name="message">string type</param>
         public MoodAnalyser(string message)
         {
-           this.str = message;
+            variable = message;
         }
 
-       
-        public string AnalyseMood()
+        /// <summary>
+        /// a Method name AnalyseMood
+        /// </summary>
+        /// <returns>it will return a string Accordin to the message variable</returns>
+        public static string AnalyseMood()
         {
             try
             {
-                if (str == "")
-                {
-
-                    Console.WriteLine("exception is {0}", MoodAnalysisException.state.EMPTY);
-                    throw new MoodAnalysisException("empty message");                    
+                if (variable == "")
+                {                    
+                    throw new MoodAnalyserException(MoodAnalyserProject.State.EMPTY + "");
                 }
-                else
+                else if (variable == null)
                 {
-                    if (str.ToLower().Contains("sad"))
-                    {
-                        return "SAD";
-                    }
+                    throw new MoodAnalyserException(MoodAnalyserProject.State.NULL + "");
+                }
 
-                    return "HAPPY";
-                }             
+                if (variable.ToLower().Contains("sad"))
+                {
+                    return "SAD";
+                }
+                return "HAPPY";
             }
-            catch (NullReferenceException)
+            
+            catch (MoodAnalyserException ex)
             {
-                //return "HAPPY";
-                 Console.WriteLine("exception is {0}", MoodAnalysisException.state.EMPTY);
-                throw new MoodAnalysisException("null message");
+               
+               throw new MoodAnalyserException(ex.Message);
             }
-
-            catch (ArgumentException)
-            {
-                Console.WriteLine("exception is {0}", MoodAnalysisException.state.OTHER);
-                throw new MoodAnalysisException("other message");
-            }
-
         }
-    }            
+
 }

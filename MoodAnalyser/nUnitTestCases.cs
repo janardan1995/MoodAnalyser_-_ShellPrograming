@@ -1,63 +1,67 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="nUnitTestCase.cs" company="Bridgelabz">
+// <copyright file="UnitTest1.cs" company="Bridgelabz">
 //   Copyright © 2020 Company="BridgeLabz"
 // </copyright>
 // <creator name="Janardan Das"/>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace NUnitTestMoodAnalyser
+namespace NUnitTestProject
 {
     using NUnit.Framework;
-    using Class1;
+    using MoodAnalyserProject;
 
+    /// <summary>
+    /// this is our test class
+    /// </summary>
     public class Tests
-    {
+    {  
+        /// <summary>
+        /// Given a message that contains sad should return sad
+        /// </summary>
         [Test]
-        public void GivenSadMessage_WhenAnalyse_ShouldReturnSad()
+        public void GivenMessage_ShouldReturnSad()
         {
-            string excepted = "SAD";
-            MoodAnalyser MA = new MoodAnalyser("I am in sad mood");
-            string match1 = MA.AnalyseMood();
-            Assert.AreEqual(excepted, match1);
+            MoodAnalyser MA = new MoodAnalyser("i am in sad mood");
+            var actual = MoodAnalyser.AnalyseMood();
+            var expected = "SAD";
+            Assert.AreEqual(expected, actual);
         }
-
+        
+        /// <summary>
+        /// Given any message except the word sad should return happy
+        /// </summary>
         [Test]
-        public void GivenAnyMesageExceptSad_WhenAnalyse_ShouldReturnHappy()
+        public void GivenMessage_ShoulReturnHappy()
         {
-
-            string expected = "HAPPY";
-            MoodAnalyser MA = new MoodAnalyser("I am in any mood");
-            string match2 = MA.AnalyseMood();
-            Assert.AreEqual(expected, match2);
-        }
-
-        //[Test]
-        //public void GivenNullMesage_WhenAnalyse_ShouldReturnHappy()
-        //{
-        //    string expected = "HAPPY";
-        //    MoodAnalyser MA = new MoodAnalyser(null);
-        //    string match3 = MA.AnalyseMood();
-        //    Assert.AreEqual(expected, match3);
-        //}
-
-        [Test]
-        public void GivenNullMessage_WhenAnalysis_ShouldThrowMoodAnalysisException()
-        {
-            MoodAnalyser MA = new MoodAnalyser(null);
-            var ex = Assert.Throws<MoodAnalysisException>(() => MA.AnalyseMood());
-            Assert.That(ex.Message, Is.EqualTo("null message"));
-            //Assert.AreEqual("null message", ex.Message);         
+            MoodAnalyser ma = new MoodAnalyser("i am in any mood");
+            var actual = MoodAnalyser.AnalyseMood();
+            var expected="HAPPY";
+            Assert.AreEqual(expected, actual);
 
         }
 
-         [Test]
-        public void GivenEmptyMessage_WhenAnalysis_ShouldThrowMoodAnalysisException()
+        /// <summary>
+        /// if our message is null then it throw caustom exception
+        /// </summary>
+        [Test]
+        public void GivenNullMessage_shouldThrowException()
+        {
+            MoodAnalyser ma = new MoodAnalyser(null);
+            var actual = Assert.Throws<MoodAnalyserException>(() => MoodAnalyser.AnalyseMood());
+            var expected = MoodAnalyserProject.State.NULL.ToString();
+            Assert.AreEqual(expected, actual.Message);
+        }
+
+        /// <summary>
+        /// if the given message is empty it throw custom exception
+        /// </summary>
+        [Test]
+        public void GivenEmptyMessage_shouldReturnException()
         {
             MoodAnalyser MA = new MoodAnalyser("");
-            var ex = Assert.Throws<MoodAnalysisException>(() => MA.AnalyseMood());
-            Assert.That(ex.Message, Is.EqualTo("empty message"));
-            //Assert.AreEqual("null message", ex.Message);         
-
+            var actual = Assert.Throws<MoodAnalyserException>(()=>MoodAnalyser.AnalyseMood());
+            var expected = MoodAnalyserProject.State.EMPTY.ToString();
+            Assert.AreEqual(expected, actual.Message);
         }
 
     }
