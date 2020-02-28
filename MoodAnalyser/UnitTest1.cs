@@ -107,5 +107,19 @@ namespace NUnitTestProject
             var excepted = false;
             Assert.AreEqual(excepted, actual);
         }
+
+        /// <summary>
+        /// using reflection for parameter constructor should return mood analyser object
+        /// </summary>
+        [Test]
+        public void GivenMoodSAnalyserWhenProper_ReturnMoodAnalyserObject()
+        {
+            MoodAnalyser MA = new MoodAnalyser("I am in sad mood");
+            var object1 = CreateMoodFactory.CreateMoodAnalyserReflectionParameter("MoodAnalyser");
+            var actual = MA.Equals(object1);            
+            Assert.IsTrue(actual);
+        }
+
+      
     }
 }

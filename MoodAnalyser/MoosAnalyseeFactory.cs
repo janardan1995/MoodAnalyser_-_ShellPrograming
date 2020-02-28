@@ -33,12 +33,10 @@ namespace MoodAnalyserProject
                 
                 ConstructorInfo constructorInfo = type.GetConstructor(Type.EmptyTypes);
                 object classObject = constructorInfo.Invoke(new object[] { });
-                return classObject;
-                
+                return classObject;                
             }
             catch (MoodAnalyserException ex)
-            {
-                
+            {                
                 return ex.Message;
             }
         }
@@ -63,9 +61,34 @@ namespace MoodAnalyserProject
                 {
                     throw new MoodAnalyserException(MoodAnalyserProject.State.N0_SUCH_METHOD_ERROR + "");
                 }
-                object classInfo = constructorInfo.Invoke(new object[] { "I an in any mood" });
+                object classInfo = constructorInfo.Invoke(new object[] { "I am in any mood" });
                 return classInfo;               
 
+            }
+            catch (MoodAnalyserException ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        /// <summary>
+        /// parameter passing constructor
+        /// </summary>
+        /// <param name="ClassName"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        public static object CreateMoodAnalyserReflectionParameter(string ClassName,params object[] p)
+        {
+            Type type = Type.GetType("MoodAnalyserProject." + ClassName);
+
+            try
+            {
+                if (type == null)
+                {
+                    throw new MoodAnalyserException(MoodAnalyserProject.State.NO_SUCH_CLASS_ERROR + "");
+                }
+                object classObject = Activator.CreateInstance(type,p);
+                return classObject;
             }
             catch (MoodAnalyserException ex)
             {
@@ -80,7 +103,7 @@ namespace MoodAnalyserProject
         public static MoodAnalyser CreateMoodAnalyserObject()
         {
             return new MoodAnalyser();
-        }
+        }     
     }
 }
 
