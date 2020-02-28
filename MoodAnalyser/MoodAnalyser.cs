@@ -43,25 +43,27 @@ namespace MoodAnalyserProject
         {
             try
             {
+                ////for empty message
                 if (variable == "")
                 {                    
                     throw new MoodAnalyserException(MoodAnalyserProject.State.EMPTY + "");
                 }
+
+                ////for null message
                 else if (variable == null)
                 {
                     throw new MoodAnalyserException(MoodAnalyserProject.State.NULL + "");
                 }
 
+                ////message contains the word sad or not 
                 if (variable.ToLower().Contains("sad"))
                 {
                     return "SAD";
                 }
                 return "HAPPY";
-            }
-            
+            }            
             catch (MoodAnalyserException ex)
-            {
-               
+            {               
                throw new MoodAnalyserException(ex.Message);
             }
         }
@@ -76,7 +78,7 @@ namespace MoodAnalyserProject
             if (obj == null)
                 return false;
 
-           else if (this.GetType().ToString().Equals(GetType().ToString()))
+           if (this.GetType().Equals(obj.GetType()))
             {
                 return true;
             }

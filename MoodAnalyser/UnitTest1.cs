@@ -5,6 +5,9 @@
 // <creator name="Janardan Das"/>
 // --------------------------------------------------------------------------------------------------------------------
 
+/// <summary>
+/// testing project for mood analyser
+/// </summary>
 namespace NUnitTestProject
 {
     using NUnit.Framework;
@@ -75,44 +78,34 @@ namespace NUnitTestProject
             var actual = Object1.Equals(Object2);
             var excepted = true;
             Assert.AreEqual(excepted, actual);
-
         }
 
         /// <summary>
-        /// Improper name should throw MoodAnalysisException
+        /// Improper class name should throw MoodAnalysisException
         /// </summary>
         [Test]
         public void GivenImproperClassName_ShouldThreough_MoodAnalysisException()
         {
-            //var Object1 = CreateMoodFactory.CreateMoodAnalyserObject();
-           // var Object2=CreateMoodFactory.CreateMoodAnalyserReflection("Improper class name");
-            //var actual = Object1.Equals(Object2);
-            //var excepted = false;
-            //Assert.AreEqual(excepted,actual);
-            var x = Assert.Throws<MoodAnalyserException>(()=>CreateMoodFactory.CreateMoodAnalyserReflection("jdtf"));
-            Assert.AreEqual("NO_SUCH_CLASS_ERROR",x.Message);
-
+            var Object1 = CreateMoodFactory.CreateMoodAnalyserObject();
+            var Object2 = CreateMoodFactory.CreateMoodAnalyserReflection("Improper class name");
+            var actual = Object1.Equals(Object2);
+            var excepted = false;
+            Assert.AreEqual(excepted, actual);
+            //var x = Assert.Throws<MoodAnalyserException>(() => CreateMoodFactory.CreateMoodAnalyserReflection("jdtf"));
+            //Assert.AreEqual("NO_SUCH_CLASS_ERROR", x.ToString());
         }
 
-        //[Test]
-        //public void GivenMoodAnalysisClassName_ShoulsReturn_MoodAnalysisObject()
-        //{
-        //    var obj1 = CreateMoodFactory.CreateMoodAnalyserObject();
-        //    var obj2 = CreateMoodFactory.CreateMoodAnalyserReflection("MoodAnalyserProject.MoodAnalyser");
-        //    var expected = true;
-        //    var actual = obj1.Equals(obj2);
-        //    Assert.AreEqual(expected, actual);
-        //}
-
-        //[Test]
-        //public void GivenImproperClassName_ShouldThreough_MoodAnalysisException()
-        //{
-        //   // var obj1 = CreateMoodFactory.CreateMoodAnalyserObject();
-        //    //var obj2 = CreateMoodFactory.CreateMoodAnalyserReflection("MoodAnalyser");
-        //    var expected = "No Such Class Error";
-        //    var actual = Assert.Throws<MoodAnalyserException>(()=> CreateMoodFactory.CreateMoodAnalyserReflection(""));
-        //    Assert.AreEqual(expected, actual.Message);
-        //}
-
+        /// <summary>
+        /// here the class name is proper but the constructor is improper
+        /// </summary>
+        [Test]
+        public void GivenImproperConstructor_shouldThrowException()
+        {
+            var object1 = CreateMoodFactory.CreateMoodAnalyserObject();
+            var object2 = CreateMoodFactory.CreateMoodAnalyserImproperConstructor("MoodAnalyser");
+            var actual = object1.Equals(object2);
+            var excepted = false;
+            Assert.AreEqual(excepted, actual);
+        }
     }
 }
