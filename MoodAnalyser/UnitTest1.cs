@@ -79,6 +79,18 @@ namespace NUnitTestProject
             var actual = ma.Equals(obj);
             var excepted = true;
             Assert.AreEqual(excepted, actual);
-        }      
+        }
+
+        /// <summary>
+        /// test case 4.2
+        /// Improper class name should return custom exception
+        /// </summary>
+        [Test]
+        public void GivenClassName_WhenImproper_shouldThrowException()
+        {
+            var actual = MoodAnalyserFactory.MoodAnalyserReflection("improper class name");
+            var expected = MoodAnalyserProject.State.NO_SUCH_CLASS_ERROR.ToString();
+            Assert.AreEqual(actual, expected);
+        }
     }
 }
