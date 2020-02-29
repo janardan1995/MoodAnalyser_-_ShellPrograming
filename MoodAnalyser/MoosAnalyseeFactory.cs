@@ -13,7 +13,7 @@ namespace MoodAnalyserProject
     /// <summary>
     /// This is MoodAnalyser Factory to create an object from reflection
     /// </summary>
-    public class MoodAnalyserFactory
+    public class MoodAnalyzerReflection
     {
         /// <summary>
         /// CreatedMoodAnalyserReflection to create a reflection object
