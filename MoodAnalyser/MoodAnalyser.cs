@@ -52,7 +52,7 @@ namespace MoodAnalyserProject
                 ////for null message
                 else if (variable == null)
                 {
-                    throw new MoodAnalyserException(MoodAnalyserProject.State.NULL + "");
+                    throw new MoodAnalyserException(MoodAnalyserProject.State.NULL_REFERENCE_ERROR + "");
                 }
 
                 ////message contains the word sad or not 
