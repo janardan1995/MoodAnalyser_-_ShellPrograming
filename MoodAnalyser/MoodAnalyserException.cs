@@ -22,14 +22,7 @@ namespace MoodAnalyserProject
     /// </summary>
     [Serializable]
     public class MoodAnalyserException : Exception
-    {
-        /// <summary>
-        /// Default MoodAnalyserException without perimeters
-        /// </summary>
-        public MoodAnalyserException() : base()
-        {
-        }
-       
+    {     
         /// <summary>
         /// this custom MoodAnalyserException taken a string typr perimeter
         /// </summary>

@@ -68,44 +68,17 @@ namespace NUnitTestProject
         }
 
         /// <summary>
+        /// test case 4.1
         /// proper className should return true 
         /// </summary>
         [Test]
-        public void GivenMoodAnalysisClassName_ShoulsReturn_MoodAnalysisObject()
+        public void GivenMoodAnalysisClassName_ShouldReturn_MoodAnalysisObject()
         {
-            var Object1 = CreateMoodFactory.CreateMoodAnalyserReflection("MoodAnalyser");
-            var Object2 = CreateMoodFactory.CreateMoodAnalyserObject();
-            var actual = Object1.Equals(Object2);
+            MoodAnalyser ma = new MoodAnalyser();
+            var obj= MoodAnalyserFactory.MoodAnalyserReflection("MoodAnalyser");           
+            var actual = ma.Equals(obj);
             var excepted = true;
             Assert.AreEqual(excepted, actual);
-        }
-
-        /// <summary>
-        /// Improper class name should throw MoodAnalysisException
-        /// </summary>
-        [Test]
-        public void GivenImproperClassName_ShouldThreough_MoodAnalysisException()
-        {
-            var Object1 = CreateMoodFactory.CreateMoodAnalyserObject();
-            var Object2 = CreateMoodFactory.CreateMoodAnalyserReflection("Improper class name");
-            var actual = Object1.Equals(Object2);
-            var excepted = false;
-            Assert.AreEqual(excepted, actual);
-            //var x = Assert.Throws<MoodAnalyserException>(() => CreateMoodFactory.CreateMoodAnalyserReflection("jdtf"));
-            //Assert.AreEqual("NO_SUCH_CLASS_ERROR", x.ToString());
-        }
-
-        /// <summary>
-        /// here the class name is proper but the constructor is improper
-        /// </summary>
-        [Test]
-        public void GivenImproperConstructor_shouldThrowException()
-        {
-            var object1 = CreateMoodFactory.CreateMoodAnalyserObject();
-            var object2 = CreateMoodFactory.CreateMoodAnalyserImproperConstructor("MoodAnalyser");
-            var actual = object1.Equals(object2);
-            var excepted = false;
-            Assert.AreEqual(excepted, actual);
-        }
+        }      
     }
 }
