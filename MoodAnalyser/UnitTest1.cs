@@ -120,6 +120,18 @@ namespace NUnitTestProject
             Assert.IsTrue(actual);
         }
 
+        /// <summary>
+        /// when we give an improper class name it should return custom exception
+        /// </summary>
+        [Test]
+        public void GivenAClassName_WhenImproperThrowAnException()
+        {
+            var actual = CreateMoodFactory.CreateMoodAnalyserReflectionParameter("wromg class name");
+            var expected = MoodAnalyserProject.State.NO_SUCH_CLASS_ERROR.ToString();
+            Assert.AreEqual(actual,expected);
+        }
+
+
       
     }
 }
