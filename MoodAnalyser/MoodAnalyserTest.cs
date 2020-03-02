@@ -122,5 +122,17 @@ namespace NUnitTestProject
             var actual = Ma.Equals(obj);
             Assert.IsTrue(actual);
         }
+
+        /// <summary>
+        /// test case 5.2
+        /// Improper class name with proper constructor should return custom exception
+        /// </summary>
+        [Test]
+        public void GivenClassName_WhenImproper_shouldThrowCustomException()
+        {
+           object actual = MoodAnalyzerReflection.MoodAnalyserReflection("Improper class name",new object[] {"I am in sad mood"});
+            var expected = State.NO_SUCH_CLASS_ERROR.ToString();
+            Assert.AreEqual(actual,expected);
+        }
     }
 }
