@@ -181,5 +181,17 @@ namespace NUnitTestProject
             var expected = "HAPPY";
             Assert.AreEqual(actual,expected);
         }
+        
+        /// <summary>
+        /// test case 7.2
+        /// feild variable name is improper which return exception
+        /// </summary>
+        [Test]
+        public static void SetfieldWhenImproper_WithReflactor_WhenAnalyse_ShouldThrowException()
+        {
+            var actual = MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser", new object[] { "I am Happy" }, "AnalyseMood","Wrong variable");
+            var expected = State.NO_SUCH_FIELD_ERROR.ToString();
+            Assert.AreEqual(actual,expected);
+        }
     }
 }
