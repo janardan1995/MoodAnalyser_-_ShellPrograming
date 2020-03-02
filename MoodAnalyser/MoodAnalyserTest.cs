@@ -13,7 +13,7 @@ namespace NUnitTestProject
     //using System;
     using NUnit.Framework;
     using MoodAnalyserProject;
-   
+
 
     /// <summary>
     /// this is our test class
@@ -80,11 +80,10 @@ namespace NUnitTestProject
         [Test]
         public void GivenMoodAnalysisClassName_WhenAnalyse_ShouldReturn_MoodAnalysisObject()
         {
-            MoodAnalyser ma = new MoodAnalyser();      ////instance object
-            var obj= MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser");      ////    using reflection 
-            var actual = ma.Equals(obj);                ////override the equal method
-            var excepted = true;
-            Assert.AreEqual(excepted, actual);
+            MoodAnalyser ma = new MoodAnalyser();
+            var obj = MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser");
+            var actual = ma.Equals(obj);
+            Assert.IsTrue(actual);
         }
 
         /// <summary>
@@ -92,12 +91,23 @@ namespace NUnitTestProject
         /// Improper class name should return custom exception
         /// </summary>
         [Test]
-        public void GivenClassName_WhenImproper_shouldThrowException()
+        public void GivenClassName_WhenImproper_WhenAnalyse_shouldThrowException()
         {
-           // var actual = MoodAnalyzerReflection.MoodAnalyserReflection("improper class name");
-            var actual = Assert.Throws<MoodAnalyserException>(() => MoodAnalyzerReflection.MoodAnalyserReflection("improper"));
-            var expected =State.NO_SUCH_CLASS_ERROR.ToString();
-            Assert.AreEqual(actual.Message, expected);
+            object actual = MoodAnalyzerReflection.MoodAnalyserReflection("improper");
+            object expected = State.NO_SUCH_CLASS_ERROR.ToString();
+            Assert.AreEqual(actual, expected);
+        }
+
+        /// <summary>
+        /// test case 4.3
+        /// wrong constructor parameter
+        /// </summary>
+        [Test]
+        public void GivenClassWhenConstructorNotProper_WhenAnalysis_ThrowException()
+        {
+            var actual = Assert.Throws<MoodAnalyserException>(() => MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser", new object[] { 123 }));
+            object expected = State.NO_SUCH_METHOD_ERROR.ToString();
+            Assert.AreEqual(expected, actual.Message);
         }
 
         /// <summary>
@@ -105,13 +115,12 @@ namespace NUnitTestProject
         /// proper className with parameter constructor should return true 
         /// </summary>
         [Test]
-        public void GivenMoodAnalysis_WhenProper_ShouldReturn_MoodAnalysisObject()
+        public void GivenMoodAnalysis_WhenProper_WhenAnalyse_ShouldReturn_MoodAnalysisObject()
         {
-            MoodAnalyser ma = new MoodAnalyser();
-            var obj = MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser","I am in Happy mood");
-            var actual = ma.Equals(obj);
-            var excepted = true;
-            Assert.AreEqual(excepted, actual);           
+            MoodAnalyser Ma = new MoodAnalyser("I am in happy mood");
+            object obj = MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser", new object[] { "I am in happy mood" });
+            var actual = Ma.Equals(obj);
+            Assert.IsTrue(actual);
         }
 
         /// <summary>
@@ -119,50 +128,47 @@ namespace NUnitTestProject
         /// Improper class name with proper constructor should return custom exception
         /// </summary>
         [Test]
-        public void GivenClassName_WhenImproper_shouldThrowCustomException()
-        {            
-            var actual = Assert.Throws<MoodAnalyserException>(() => MoodAnalyzerReflection.MoodAnalyserReflection("improperClassName","I am in sad mood"));
+        public void GivenClassName_WhenImproper_WhenAnalyse_shouldThrowCustomException()
+        {
+            object actual = MoodAnalyzerReflection.MoodAnalyserReflection("Improper class name", new object[] { "I am in sad mood" });
             var expected = State.NO_SUCH_CLASS_ERROR.ToString();
-            Assert.AreEqual(actual.Message, expected);
+            Assert.AreEqual(actual, expected);
         }
-
         /// <summary>
-        /// test case 5.3/4.3
+        /// test case 5.3
         /// when constructor parameter is improper , it returns exception 
         /// </summary>
         [Test]
-        public void GivenClassWhenConstructorNotProper_WhenAnalyse_ShouldThrowException()
+        public void GivenProperClassName_WhenConstructorNotProper_WhenAnalyse_ShouldThrowException()
         {
-            var actual =Assert.Throws<MoodAnalyserException>(()=> MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser",123));           
+            var actual = Assert.Throws<MoodAnalyserException>(() => MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser", new object[] { 123 }));
             var expected = State.NO_SUCH_METHOD_ERROR.ToString();
             Assert.AreEqual(actual.Message, expected);
         }
 
         /// <summary>
+        /// test case 6.1
         /// In constructor parameter we are passing Happy mood and  returns return happy mood 
         /// </summary>
         [Test]
         public void GivenHappyMessage_UsingReflection_WhenProper_ShouldReturn_HappyMood()
         {
-            var obj = MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser", "I am happy");
+            var obj = MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser", new object[] { "I am happy" });
             var actual = obj.GetType().GetMethod("AnalyseMood").Invoke(obj, null);
             var expected = "HAPPY";
             Assert.AreEqual(actual, expected);
         }
 
         ///<summary>
+        ///test case 6.2
         /// In constructor parameter we are passing Happy mood and returns return happy mood 
         /// </summary>
         [Test]
-        public void GivenHappyMessage__WhenImproperMethod_ShouldThrowAnException()
-        {         
-            var actual =Assert.Throws<MoodAnalyserException>(()=>MoodAnalyzerReflection.MoodAnalyserReflector1("wrong method name"));
-            var exception = MoodAnalyserProject.State.NO_SUCH_METHOD_ERROR.ToString();
-            Assert.AreEqual(actual.Message,exception);
-     
+        public void GivenHappyMessage__WhenImproperMethod_WhenAnalysis_ShouldThrowAnException()
+        {
+            var actual = MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser",new object[] {"I am Happy"} , "Wrong Method Name");
+            var expected = State.NO_SUCH_METHOD_ERROR.ToString();
+            Assert.AreEqual(actual,expected);
         }
-
-        
-
     }
 }

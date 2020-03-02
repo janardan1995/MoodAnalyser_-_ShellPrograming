@@ -8,6 +8,7 @@
 namespace MoodAnalyserProject
 {
     using System;
+    using MoodAnalyserProject;
     using System.Reflection;
 
     /// <summary>
@@ -20,15 +21,28 @@ namespace MoodAnalyserProject
         /// </summary>
         /// <param name="ClassName">it will return object  </param>
         /// <returns>its return an object</returns
-        public static object MoodAnalyserReflection(string ClassName, params object[] p)
+        public static object MoodAnalyserReflection(string ClassName,Object[] ConstructorPara = null,string MethodName=null)
         {
             try
             {
                 ////Type class takes object information from metadata  
                 Type type = Type.GetType("MoodAnalyserProject." + ClassName);
-
+                if (type == null)
+                    throw new MoodAnalyserException(State.NO_SUCH_CLASS_ERROR.ToString());
+               
                 ////to create instance of that class
-                var obj = Activator.CreateInstance(type, p);
+                Object obj = Activator.CreateInstance(type, ConstructorPara); 
+                
+                if(MethodName != null)
+                {
+                    MethodInfo MI = type.GetMethod("MethodName");
+                    if (MI == null)
+                        throw new MoodAnalyserException(State.NO_SUCH_METHOD_ERROR.ToString());
+
+                    object Method = MI.Invoke(obj,null);
+                    return Method;
+                }
+                
                 return obj;
             }
             catch (ArgumentNullException)
@@ -38,40 +52,12 @@ namespace MoodAnalyserProject
             }
             catch (MissingMethodException)
             {
-                ////Throw NO_SUCH_METHOD_ERROR
+                ////Throw when method or constructor is not proper
                 throw new MoodAnalyserException(MoodAnalyserProject.State.NO_SUCH_METHOD_ERROR.ToString());
             }
-            catch (Exception)
+            catch (MoodAnalyserException ex)
             {
-                throw new MoodAnalyserException(MoodAnalyserProject.State.OTHER.ToString());
-            }
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="methodName"></param>
-        /// <returns></returns>
-        public static string MoodAnalyserReflector1(string methodName)
-        {
-            try
-            {
-                Assembly executing = Assembly.GetExecutingAssembly();
-                Type type = executing.GetType("MoodAnalyserProject.MoodAnalyser");
-                MethodInfo methodInfo = type.GetMethod(methodName);
-                if (methodInfo == null)
-                    throw new MoodAnalyserException(MoodAnalyserProject.State.NO_SUCH_METHOD_ERROR.ToString());
-                return methodName;
-            }
-            //    string[] parametersArray = { "I am in Happy mood" };
-            //    object classInstance = Activator.CreateInstance(type, parametersArray);
-            //    object result = methodInfo.Invoke(classInstance, null);
-            //    return result.ToString();
-            //}
-            catch (Exception)
-            {
-                throw new MoodAnalyserException(MoodAnalyserProject.State.NO_SUCH_METHOD_ERROR.ToString());
+                return ex.Message;
             }
         }
     }
