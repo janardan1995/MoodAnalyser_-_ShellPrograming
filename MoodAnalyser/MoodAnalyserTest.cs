@@ -177,7 +177,7 @@ namespace NUnitTestProject
         [Test]
         public static void SetHappyMessage_WithReflactor_WhenAnalyse_ShouldReturnHappy()
         {
-            var actual = MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser", new object[] { "I am Happy" }, "AnalyseMood","variable");
+            var actual = MoodAnalyzerReflection.MoodAnalyserReflectionField("MoodAnalyser", new object[] { "I am Happy" }, "AnalyseMood","variable");
             var expected = "HAPPY";
             Assert.AreEqual(actual,expected);
         }
@@ -189,9 +189,22 @@ namespace NUnitTestProject
         [Test]
         public static void SetfieldWhenImproper_WithReflactor_WhenAnalyse_ShouldThrowException()
         {
-            var actual = MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser", new object[] { "I am Happy" }, "AnalyseMood","Wrong variable");
+            var actual = MoodAnalyzerReflection.MoodAnalyserReflectionField("MoodAnalyser", new object[] { "I am Happy" }, "AnalyseMood","Wrong variable");
             var expected = State.NO_SUCH_FIELD_ERROR.ToString();
             Assert.AreEqual(actual,expected);
         }
+
+         /// <summary>
+        /// test case 7.3
+        /// feild variable is null which return exception
+        /// </summary>
+        [Test]
+        public static void SettingNullMessageInReflactor_WhenAnalyse_ShouldThrowException()
+        {
+            var actual = MoodAnalyzerReflection.MoodAnalyserReflectionField("MoodAnalyser", new object[] { "I am Happy" }, "AnalyseMood",null);
+            var expected = State.NULL_REFERENCE_ERROR.ToString();
+            Assert.AreEqual(actual,expected);
+        }
+
     }
 }
