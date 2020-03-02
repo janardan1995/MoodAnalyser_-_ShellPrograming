@@ -13,7 +13,7 @@ namespace NUnitTestProject
     //using System;
     using NUnit.Framework;
     using MoodAnalyserProject;
-   
+
 
     /// <summary>
     /// this is our test class
@@ -80,9 +80,9 @@ namespace NUnitTestProject
         [Test]
         public void GivenMoodAnalysisClassName_WhenAnalyse_ShouldReturn_MoodAnalysisObject()
         {
-            MoodAnalyser ma = new MoodAnalyser();      
-            var obj= MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser");   
-            var actual = ma.Equals(obj);            
+            MoodAnalyser ma = new MoodAnalyser();
+            var obj = MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser");
+            var actual = ma.Equals(obj);
             Assert.IsTrue(actual);
         }
 
@@ -91,8 +91,8 @@ namespace NUnitTestProject
         /// Improper class name should return custom exception
         /// </summary>
         [Test]
-        public void GivenClassName_WhenImproper_shouldThrowException()
-        {            
+        public void GivenClassName_WhenImproper_WhenAnalyse_shouldThrowException()
+        {
             object actual = MoodAnalyzerReflection.MoodAnalyserReflection("improper");
             object expected = State.NO_SUCH_CLASS_ERROR.ToString();
             Assert.AreEqual(actual, expected);
@@ -105,9 +105,9 @@ namespace NUnitTestProject
         [Test]
         public void GivenClassWhenConstructorNotProper_WhenAnalysis_ThrowException()
         {
-            var actual = Assert.Throws<MoodAnalyserException>(()=>MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser", new object[] { 123 }));
+            var actual = Assert.Throws<MoodAnalyserException>(() => MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser", new object[] { 123 }));
             object expected = State.NO_SUCH_METHOD_ERROR.ToString();
-            Assert.AreEqual(expected,actual.Message);
+            Assert.AreEqual(expected, actual.Message);
         }
 
         /// <summary>
@@ -115,10 +115,10 @@ namespace NUnitTestProject
         /// proper className with parameter constructor should return true 
         /// </summary>
         [Test]
-        public void GivenMoodAnalysis_WhenProper_ShouldReturn_MoodAnalysisObject()
+        public void GivenMoodAnalysis_WhenProper_WhenAnalyse_ShouldReturn_MoodAnalysisObject()
         {
             MoodAnalyser Ma = new MoodAnalyser("I am in happy mood");
-            object obj=MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser", new object[] { "I am in happy mood" });
+            object obj = MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser", new object[] { "I am in happy mood" });
             var actual = Ma.Equals(obj);
             Assert.IsTrue(actual);
         }
@@ -128,11 +128,22 @@ namespace NUnitTestProject
         /// Improper class name with proper constructor should return custom exception
         /// </summary>
         [Test]
-        public void GivenClassName_WhenImproper_shouldThrowCustomException()
+        public void GivenClassName_WhenImproper_WhenAnalyse_shouldThrowCustomException()
         {
-           object actual = MoodAnalyzerReflection.MoodAnalyserReflection("Improper class name",new object[] {"I am in sad mood"});
+            object actual = MoodAnalyzerReflection.MoodAnalyserReflection("Improper class name", new object[] { "I am in sad mood" });
             var expected = State.NO_SUCH_CLASS_ERROR.ToString();
-            Assert.AreEqual(actual,expected);
+            Assert.AreEqual(actual, expected);
+        }
+        /// <summary>
+        /// test case 5.3/4.3
+        /// when constructor parameter is improper , it returns exception 
+        /// </summary>
+        [Test]
+        public void GivenProperClassName_WhenConstructorNotProper_WhenAnalyse_ShouldThrowException()
+        {
+            var actual =Assert.Throws<MoodAnalyserException>(()=> MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser",new object[] {123}));
+            var expected = State.NO_SUCH_METHOD_ERROR.ToString();
+            Assert.AreEqual(actual.Message,expected);
         }
     }
 }
