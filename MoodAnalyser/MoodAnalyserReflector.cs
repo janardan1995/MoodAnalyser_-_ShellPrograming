@@ -21,7 +21,7 @@ namespace MoodAnalyserProject
         /// </summary>
         /// <param name="ClassName">it will return object  </param>
         /// <returns>its return an object</returns
-        public static object MoodAnalyserReflection(string ClassName,Object[] ConstructorPara = null,string MethodName=null)
+        public static object MoodAnalyserReflection(string ClassName,Object[] ConstructorPara = null,string MethodName=null,string FieldValue=null)
         {
             try
             {
@@ -31,11 +31,21 @@ namespace MoodAnalyserProject
                     throw new MoodAnalyserException(State.NO_SUCH_CLASS_ERROR.ToString());
                
                 ////to create instance of that class
-                Object obj = Activator.CreateInstance(type, ConstructorPara); 
-                
-                if(MethodName != null)
+                Object obj = Activator.CreateInstance(type, ConstructorPara);
+
+                if (FieldValue != null)
                 {
-                    MethodInfo MI = type.GetMethod("MethodName");
+                    FieldInfo fieldInfo = type.GetField(FieldValue);
+                    if (fieldInfo == null)
+                        throw new MoodAnalyserException(State.NO_SUCH_FIELD_ERROR.ToString());
+                   
+                    fieldInfo.SetValue(obj, FieldValue);
+                    
+                }            
+
+                if (MethodName != null)
+                {
+                    MethodInfo MI = type.GetMethod(MethodName);
                     if (MI == null)
                         throw new MoodAnalyserException(State.NO_SUCH_METHOD_ERROR.ToString());
 

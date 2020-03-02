@@ -153,8 +153,7 @@ namespace NUnitTestProject
         [Test]
         public void GivenHappyMessage_UsingReflection_WhenProper_ShouldReturn_HappyMood()
         {
-            var obj = MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser", new object[] { "I am happy" });
-            var actual = obj.GetType().GetMethod("AnalyseMood").Invoke(obj, null);
+            var actual = MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser", new object[] { "I am happy" }, "AnalyseMood");            
             var expected = "HAPPY";
             Assert.AreEqual(actual, expected);
         }
@@ -168,6 +167,18 @@ namespace NUnitTestProject
         {
             var actual = MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser",new object[] {"I am Happy"} , "Wrong Method Name");
             var expected = State.NO_SUCH_METHOD_ERROR.ToString();
+            Assert.AreEqual(actual,expected);
+        }
+
+        /// <summary>
+        /// test case 7.1
+        /// With reflector set happy massage and its return happy
+        /// </summary>
+        [Test]
+        public static void SetHappyMessage_WithReflactor_WhenAnalyse_ShouldReturnHappy()
+        {
+            var actual = MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser", new object[] { "I am Happy" }, "AnalyseMood","variable");
+            var expected = "HAPPY";
             Assert.AreEqual(actual,expected);
         }
     }
