@@ -14,7 +14,10 @@ namespace MoodAnalyserProject
     /// </summary>   
     public enum State
     {
-        EMPTY,NULL,N0_SUCH_METHOD_ERROR, NO_SUCH_CLASS_ERROR,OTHER
+        EMPTY,
+        NULL_REFERENCE_ERROR,
+        NO_SUCH_METHOD_ERROR, 
+        NO_SUCH_CLASS_ERROR,OTHER,
     }
 
     /// <summary>
