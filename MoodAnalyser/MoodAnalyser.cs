@@ -61,7 +61,11 @@ namespace MoodAnalyserProject
                     return "SAD";
                 }
                 return "HAPPY";
-            }            
+            }
+            catch (NullReferenceException)
+            {
+                throw new MoodAnalyserException("NO_SUCH_METHOD_ERROR");
+            }
             catch (MoodAnalyserException ex)
             {               
                throw new MoodAnalyserException(ex.Message);

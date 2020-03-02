@@ -16,9 +16,8 @@ namespace MoodAnalyserProject
     {
         EMPTY,
         NULL_REFERENCE_ERROR,
-        N0_SUCH_METHOD_ERROR, 
+        NO_SUCH_METHOD_ERROR, 
         NO_SUCH_CLASS_ERROR,OTHER,
-        NO_SUCH_METHOD_ERROR
     }
 
     /// <summary>
