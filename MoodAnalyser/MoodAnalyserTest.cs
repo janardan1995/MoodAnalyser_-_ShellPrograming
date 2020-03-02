@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="UnitTest1.cs" company="Bridgelabz">
+// <copyright file="MoodAnalyserTest.cs" company="Bridgelabz">
 //   Copyright © 2020 Company="BridgeLabz"
 // </copyright>
 // <creator name="Janardan Das"/>
@@ -10,8 +10,10 @@
 /// </summary>
 namespace NUnitTestProject
 {
+    //using System;
     using NUnit.Framework;
     using MoodAnalyserProject;
+   
 
     /// <summary>
     /// this is our test class
@@ -23,7 +25,7 @@ namespace NUnitTestProject
         /// Given a message that contains sad should return sad
         /// </summary>
         [Test]
-        public void GivenMessage_ShouldReturnSad()
+        public void GivenSadMessage_WhenAnalyse_ShouldReturnSad()
         {
             MoodAnalyser MA = new MoodAnalyser("i am in sad mood");
             var actual = MoodAnalyser.AnalyseMood();
@@ -36,7 +38,7 @@ namespace NUnitTestProject
         /// Given any message except the word sad should return happy
         /// </summary>
         [Test]
-        public void GivenMessage_ShoulReturnHappy()
+        public void GivenAnyyMessage_Except_SadMessage_WhenAnalyse_ShoulReturnHappy()
         {
             MoodAnalyser ma = new MoodAnalyser("i am in any mood");
             var actual = MoodAnalyser.AnalyseMood();
@@ -50,7 +52,7 @@ namespace NUnitTestProject
         /// if our message is null then it throw caustom exception
         /// </summary>
         [Test]
-        public void GivenNullMessage_shouldThrowException()
+        public void GivenNullMessage_WhenAnalyse_shouldThrowException()
         {
             MoodAnalyser ma = new MoodAnalyser(null);
             var actual = Assert.Throws<MoodAnalyserException>(() => MoodAnalyser.AnalyseMood());
@@ -63,7 +65,7 @@ namespace NUnitTestProject
         /// if the given message is empty it throw custom exception
         /// </summary>
         [Test]
-        public void GivenEmptyMessage_shouldReturnException()
+        public void GivenEmptyMessage_WhenAnalyse_shouldReturnException()
         {
             MoodAnalyser MA = new MoodAnalyser("");
             var actual = Assert.Throws<MoodAnalyserException>(() => MoodAnalyser.AnalyseMood());
@@ -76,7 +78,7 @@ namespace NUnitTestProject
         /// proper className should return true 
         /// </summary>
         [Test]
-        public void GivenMoodAnalysisClassName_ShouldReturn_MoodAnalysisObject()
+        public void GivenMoodAnalysisClassName_WhenAnalyse_ShouldReturn_MoodAnalysisObject()
         {
             MoodAnalyser ma = new MoodAnalyser();      ////instance object
             var obj= MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser");      ////    using reflection 
@@ -103,13 +105,13 @@ namespace NUnitTestProject
         /// proper className with parameter constructor should return true 
         /// </summary>
         [Test]
-        public void GivenMoodAnalysisWhenProper_ShouldReturn_MoodAnalysisObject()
+        public void GivenMoodAnalysis_WhenProper_ShouldReturn_MoodAnalysisObject()
         {
             MoodAnalyser ma = new MoodAnalyser();
             var obj = MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser","I am in Happy mood");
             var actual = ma.Equals(obj);
             var excepted = true;
-            Assert.AreEqual(excepted, actual);
+            Assert.AreEqual(excepted, actual);           
         }
 
         /// <summary>
@@ -129,7 +131,7 @@ namespace NUnitTestProject
         /// when constructor parameter is improper , it returns exception 
         /// </summary>
         [Test]
-        public void GivenClassWhenConstructorNotProper_ShouldThrowException()
+        public void GivenClassWhenConstructorNotProper_WhenAnalyse_ShouldThrowException()
         {
             var actual =Assert.Throws<MoodAnalyserException>(()=> MoodAnalyzerReflection.MoodAnalyserReflection("MoodAnalyser",123));           
             var expected = State.NO_SUCH_METHOD_ERROR.ToString();
@@ -147,5 +149,20 @@ namespace NUnitTestProject
             var expected = "HAPPY";
             Assert.AreEqual(actual, expected);
         }
+
+        ///<summary>
+        /// In constructor parameter we are passing Happy mood and returns return happy mood 
+        /// </summary>
+        [Test]
+        public void GivenHappyMessage__WhenImproperMethod_ShouldThrowAnException()
+        {         
+            var actual =Assert.Throws<MoodAnalyserException>(()=>MoodAnalyzerReflection.MoodAnalyserReflector1("wrong method name"));
+            var exception = MoodAnalyserProject.State.NO_SUCH_METHOD_ERROR.ToString();
+            Assert.AreEqual(actual.Message,exception);
+     
+        }
+
+        
+
     }
 }
